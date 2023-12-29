@@ -1,6 +1,10 @@
 import sqlite3
 
 # Putri Angraini Aziz E1E122074
+
+
+# Ini adalah kelas induk
+#tidak ada yang overide karena ini adalah class untuk koneksi database
 class DatabaseManager:
     def __init__(self, db_file):
         self.conn = self.create_connection(db_file)
@@ -78,3 +82,12 @@ class User(DatabaseManager):
         else:
             return "404"
 
+class komen(DatabaseManager):
+    def __init__(self,db_file,user,komen):
+        super().__init__(db_file)
+        self.__user = user
+        self.komen = komen
+    
+    def tambah_data(self):
+        query = f"INSERT INTO komen VALUES('{self.__user}','{self.komen}')"
+        self.execute_query(query)
